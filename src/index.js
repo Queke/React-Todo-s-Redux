@@ -1,11 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import App, { reducer } from "./App"; // <== esto es una mala práctica
+import App from "./App"; // <== esto es una mala práctica
+import { asyncMiddleware } from "./middewares/async";
 import reportWebVitals from "./reportWebVitals";
+import { reducer } from "./features/todos";
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(asyncMiddleware));
 
 ReactDOM.render(
   <React.StrictMode>
